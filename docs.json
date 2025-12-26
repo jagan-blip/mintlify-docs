@@ -1,31 +1,167 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
+  "$schema": "https://mintlify.com/docs.json",
   "name": "Mint Starter Kit",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
     "dark": "#15803D"
   },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
   "favicon": "/favicon.svg",
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:hi@mintlify.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://dashboard.mintlify.com"
+    }
+  },
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Documentation",
+          "icon": "book-open-cover",
+          "href": "https://mintlify.com/docs"
+        },
+        {
+          "anchor": "Blog",
+          "icon": "newspaper",
+          "href": "https://mintlify.com/blog"
+        }
+      ]
+    },
     "tabs": [
       {
         "tab": "Guides",
-        "groups": [
+        "pages": [
+          "guides/welcome-to-turbodev-docs",
           {
             "group": "Getting started",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "index-copied-1",
+              "guides/getting-started/signup",
+              "quickstart"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Connect WhatsApp Channel",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "guides/connect-whats-app-channel/connect-your-whats-app"
+            ]
+          },
+          {
+            "group": "CONVERSATIONS",
+            "pages": [
+              "guides/conversations/team-inbox",
+              "guides/conversations/initiate-a-new-chat",
+              "guides/conversations/efficiently-using-inbox"
+            ]
+          },
+          {
+            "group": "CONTACTS",
+            "pages": [
+              "guides/contacts/add-contact",
+              "guides/contacts/contact-segments",
+              "guides/contacts/contact-management",
+              "guides/contacts/contact-updation",
+              "guides/contacts/contact-deletion",
+              "guides/contacts/export-contacts",
+              {
+                "group": "Marketing Opt-In",
+                "pages": [
+                  "guides/contacts/marketing-opt-in/marketing-opt-in-on-contact-creation",
+                  "guides/contacts/marketing-opt-in/marketing-opt-in-handling-methods",
+                  "guides/contacts/marketing-opt-in/marketing-opt-out-management"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "BOTS",
+            "pages": [
+              "guides/bots/bots-in-turbo-dev",
+              {
+                "group": "Send Card",
+                "pages": [
+                  "guides/bots/send-card/send-text",
+                  "guides/bots/send-card/send-media",
+                  "guides/bots/send-card/send-collection",
+                  "guides/bots/send-card/send-products",
+                  "guides/bots/send-card/send-template",
+                  "guides/bots/send-card/send-location"
+                ]
+              },
+              {
+                "group": "Ask Questions",
+                "pages": [
+                  "guides/bots/ask-questions/ask-text",
+                  "guides/bots/ask-questions/ask-media",
+                  "guides/bots/ask-questions/ask-location",
+                  "guides/bots/ask-questions/ask-button-option",
+                  "guides/bots/ask-questions/ask-list-option"
+                ]
+              },
+              {
+                "group": "Bot Utilities",
+                "pages": [
+                  "guides/bots/bot-utilities/delay",
+                  "guides/bots/bot-utilities/condition"
+                ]
+              },
+              {
+                "group": "Bot Actions",
+                "pages": [
+                  "guides/bots/bot-actions/assign-conversation",
+                  "guides/bots/bot-actions/unassign-conversations",
+                  "guides/bots/bot-actions/resolve-conversations",
+                  "guides/bots/bot-actions/update-contact-fields",
+                  "guides/bots/bot-actions/add-note"
+                ]
+              },
+              "guides/bots/bot-management"
+            ]
+          },
+          {
+            "group": "BROADCAST",
+            "pages": [
+              "guides/broadcast/turbodev-broadcast",
+              "guides/broadcast/select-template",
+              "guides/broadcast/select-audience",
+              "guides/broadcast/review-and-send-broadcast",
+              "guides/broadcast/broadcast-analytics-and-report"
+            ]
+          },
+          {
+            "group": "WHATSAPP SHOP",
+            "pages": [
+              "guides/whats-app-shop/turbodev-whats-app-shop",
+              "guides/whats-app-shop/connect-your-catalog-with-meta",
+              "guides/whats-app-shop/connect-catalog-with-turbodev"
+            ]
+          },
+          {
+            "group": "WHATSAPP CHANNEL",
+            "pages": [
+              "guides/whatsapp-channel/channel-settings",
+              "guides/whatsapp-channel/account-profile-info"
+            ]
+          },
+          {
+            "group": "INTEGRATION",
+            "pages": [
+              "guides/integration/webhooks",
+              "guides/integration/shopify"
             ]
           },
           {
@@ -67,50 +203,7 @@
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+    ]
   },
   "footer": {
     "socials": {
@@ -118,5 +211,17 @@
       "github": "https://github.com/mintlify",
       "linkedin": "https://linkedin.com/company/mintlify"
     }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   }
 }
