@@ -158,7 +158,6 @@
           {
             "group": "INTEGRATION",
             "pages": [
-              "guides/integration/webhooks",
               "guides/integration/shopify"
             ]
           },
