@@ -48,7 +48,6 @@
           {
             "group": "Getting started",
             "pages": [
-              "index",
               "index-copied-1",
               "guides/getting-started/signup",
               "quickstart"
