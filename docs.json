@@ -26,15 +26,6 @@
     }
   },
   "navigation": {
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "icon": "book-open-cover",
-          "href": "https://mintlify.com/docs"
-        }
-      ]
-    },
     "tabs": [
       {
         "tab": "Guides",
