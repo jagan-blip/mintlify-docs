@@ -48,7 +48,7 @@
           {
             "group": "Getting started",
             "pages": [
-              "index-copied-1",
+              "pre-requisites",
               "guides/getting-started/signup"
             ]
           },
