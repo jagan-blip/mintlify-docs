@@ -1,7 +1,7 @@
 {
   "theme": "mint",
   "$schema": "https://mintlify.com/docs.json",
-  "name": "Mint Starter Kit",
+  "name": "Turbodev Docs",
   "colors": {
     "primary": "#855AFC",
     "light": "#ae92fc",
@@ -9,7 +9,8 @@
   },
   "logo": {
     "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "dark": "/logo/dark.svg",
+    "href": "https://www.turbodev.ai"
   },
   "favicon": "/favicon.png",
   "navbar": {
@@ -22,7 +23,7 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "href": "https://app-v2.turbodev.ai"
     }
   },
   "navigation": {
