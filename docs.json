@@ -42,6 +42,7 @@
           {
             "group": "Connect WhatsApp Channel",
             "pages": [
+              "guides/connect-whats-app-channel/meta-business-verification",
               "guides/connect-whats-app-channel/connect-your-whats-app"
             ]
           },
