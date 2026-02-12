@@ -117,6 +117,12 @@
                   "guides/bots/bot-actions/add-note"
                 ]
               },
+              {
+                "group": "API",
+                "pages": [
+                  "connect-whats-app-and-google-sheets"
+                ]
+              },
               "guides/bots/bot-management"
             ]
           },

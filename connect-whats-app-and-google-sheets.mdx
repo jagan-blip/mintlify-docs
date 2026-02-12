@@ -1,0 +1,112 @@
+---
+title: "Connect WhatsApp and Google Sheets to Collect Responses"
+---
+
+Easily capture and organize WhatsApp responses directly inside Google Sheets.\
+With a simple setup using Google Apps Script, you can automatically send chatbot data like names, phone numbers, emails, and messages into a structured spreadsheet in real time. No server required, no complex backend setup. Just connect your bot and start collecting leads instantly.
+
+# Google Sheets + Apps Script Webhook
+
+This method requires no server and works perfectly with chatbot flows.
+
+## STEP 1: Create Google Sheet
+
+1. Go to **Google Sheets**
+2. Create a new sheet
+3. Add column headers like:
+
+```
+Name | Phone | Email | Message | Date
+```
+
+## STEP 2: Create Apps Script Webhook
+
+1. Click **Extensions → Apps Script**
+2. Delete the default code
+3. Paste this code:
+
+```
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  
+  sheet.appendRow([
+    data.name,
+    data.phone,
+    data.email,
+    data.message,
+    new Date()
+  ]);
+  
+  return ContentService
+    .createTextOutput(JSON.stringify({status: "success"}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+<Note>
+  Edit the code snippet - sheet.appendRow([  ]); according to your workflow
+</Note>
+
+4. Click **Deploy**
+5. Select **New Deployment**
+6. Choose **Web App**
+7. Under Access:\
+    Select **Anyone**
+8. Click **Deploy**
+9. Copy the **Web App URL**
+
+This URL is your API endpoint.
+
+## STEP 3: Configure in Turbodev API Block
+
+Now go to your API section in Turbodev (API Call block).
+
+### Set:
+
+### HTTP Method:
+
+```
+POST
+```
+
+### URL:
+
+Paste your Apps Script Web App URL
+
+### Headers:
+
+Add:
+
+```
+content-type : application/json
+```
+
+### Body:
+
+Map your chatbot variables like this:
+
+```
+{
+  "name": "{{name}}",
+  "phone": "{{phone}}",
+  "email": "{{email}}",
+  "message": "{{message}}"
+}
+```
+
+<Info>
+  Make sure the variable names match exactly with your chatbot flow.
+</Info>
+
+### Then:
+
+Click **Test API**
+
+If successful, you will see:
+
+```
+{"status":"success"}
+```
+
+Your WhatsApp responses will now automatically appear inside your Google Sheet
