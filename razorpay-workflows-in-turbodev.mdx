@@ -1,0 +1,161 @@
+---
+title: "Razorpay Workflows in Turbodev"
+---
+
+Razorpay workflows in Turbodev allow you to automatically send WhatsApp notifications to customers based on payment events such as successful payments, failed transactions, and refunds.
+
+Once Razorpay is integrated and active, you can create workflows that trigger messages instantly when payment events occur. This helps keep customers informed and improves the overall payment experience.
+
+## Available Razorpay Workflow Triggers in Turbodev
+
+You can create workflows for the following Razorpay events:
+
+- Payment Captured (successful payment)
+- Payment Failed
+- Refund Processed
+
+  <Frame>
+    ![Razorpay Workflow](/imagesIntegration/Razorpay/Razorpay_workflow.png)
+  </Frame>
+
+Each workflow can automatically send WhatsApp messages to customers using approved templates.
+
+## How to Create Payment Captured Workflow
+
+Send payment status notifications to your customers when a payment is successfully captured.
+
+### Steps to configure Payment Captured workflow
+
+1. Go to **Workflows** in your Turbodev dashboard
+2. Click on the **Payment Captured workflow**
+
+   <Frame>
+     ![Razorpay Payment Captured](/images/Integration/Razorpay/Razorpay_payment_captured.png)
+   </Frame>
+3. Select the WhatsApp template that you have already created and got approved from Meta
+4. Map the required variables such as:
+   - Customer name
+   - Payment amount
+   - Transaction details
+5. Select actions if you want to update any contact fields in Turbodev (optional)
+6. Click **Save Workflow**
+
+Once the workflow is saved, the toggle will automatically be turned ON.
+
+<Frame>
+  ![Razorpay Payment Captured Toggle](/images/Integration/Razorpay/Razorpay_payment_captured_toggle.png)
+</Frame>
+
+If you want to deactivate the workflow, you can turn OFF the toggle anytime.
+
+Now, whenever a payment is captured in Razorpay, the WhatsApp message will be sent automatically to the customer.
+
+## How to Create Payment Failed Workflow
+
+Send automated notifications when a payment fails and encourage customers to retry.
+
+### Steps to configure Payment Failed workflow
+
+1. Go to **Workflows** in your Turbodev dashboard
+2. Click on the **Payment Failed workflow**
+
+   <Frame>
+     ![Razorpay Payment Failed](/images/Integration/Razorpay/Razorpay_payment_failed.png)
+   </Frame>
+3. Select the WhatsApp template approved by Meta
+4. Map the required variables
+5. Select actions if you want to update contact fields in Turbodev (optional)
+6. Click **Save Workflow**
+
+Once saved, the workflow toggle will be turned ON.
+
+<Frame>
+  ![Razorpay Payment Failed Toggle](/images/Integration/Razorpay/Razorpay_payment_failed_toggle.png)
+</Frame>
+
+You can deactivate the workflow anytime by turning OFF the toggle.
+
+Now, whenever a payment fails, Turbodev will automatically send a WhatsApp notification to the customer.
+
+## How to Create Refund Processed Workflow
+
+Send refund status updates to customers and keep them informed about their transaction.
+
+### Steps to configure Refund Processed workflow
+
+1. Go to **Workflows** in your Turbodev dashboard
+2. Click on the **Refund Processed workflow**
+
+   <Frame>
+     ![Razorpay Payment Refund](/images/Integration/Razorpay/Razorpay_payment_refund.png)
+   </Frame>
+3. Select the approved WhatsApp template
+4. Map the required variables
+5. Select actions if needed to update contact fields
+6. Click **Save Workflow**
+
+Once saved, the workflow toggle will be turned ON.
+
+<Frame>
+  ![Razorpay Payment Refund Toggle](/images/Integration/Razorpay/Razorpay_payment_refund_toggle.png)
+</Frame>
+
+You can deactivate the workflow anytime using the toggle.
+
+Whenever a refund is processed, the WhatsApp message will be sent automatically.
+
+## Workflow Toggle Control
+
+Each workflow has a toggle option.
+
+- Toggle ON → Workflow is active and messages will be sent
+- Toggle OFF → Workflow is inactive and messages will not be sent
+
+This allows you to easily control automation.
+
+## Viewing Razorpay Workflow Logs
+
+Turbodev provides detailed logs for all Razorpay workflow activity.
+
+### To view logs:
+
+1. Go to **Logs** in your Turbodev dashboard
+
+   <Frame>
+     ![Razorpay Logs](/images/Integration/Razorpay/Razorpay_logs.png)
+   </Frame>
+
+Here you can view:
+
+- Workflow name
+- Customer name
+- Customer number
+- Template used
+- Workflow status
+- Message status (sent, delivered, failed)
+- Date and time
+
+You can also:
+
+- Search using customer name
+- Search using phone number
+- Search using workflow name
+- Filter logs based on status
+
+This helps you monitor and track all automated messages.
+
+## How Razorpay Workflows Work in Turbodev
+
+Workflow process:
+
+1. Customer completes payment, fails payment, or receives refund
+2. Razorpay sends the event data to Turbodev
+3. Turbodev triggers the selected workflow
+4. WhatsApp message is sent automatically
+5. Logs are recorded for tracking and monitoring
+
+### You're Ready to Automate Razorpay Notifications
+
+Once your Razorpay workflows are configured and active, Turbodev will automatically notify customers about their payment status.
+
+This improves customer communication, reduces manual work, and ensures a seamless payment experien

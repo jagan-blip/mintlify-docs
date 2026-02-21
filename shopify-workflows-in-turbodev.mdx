@@ -1,0 +1,202 @@
+---
+title: "Shopify Workflows in Turbodev"
+---
+
+Once your Shopify store is connected with TurboDev, you can automate customer communication across the entire order lifecycle. Shopify workflows allow you to automatically send WhatsApp messages based on real-time customer actions such as placing an order, abandoning a cart, or receiving a delivery.
+
+These workflows help you improve customer experience, increase conversions, and eliminate manual follow-ups.
+
+## How Shopify Workflows Work in TurboDev
+
+TurboDev connects directly with your Shopify store and listens for key events such as:
+
+- Cart abandoned
+- Order created
+- Order fulfilled
+- Order delivered
+- Order cancelled
+
+When one of these events occurs, TurboDev automatically triggers the workflow and sends the configured WhatsApp message to the customer.
+
+You can fully customize the message, timing, and automation logic using the visual workflow builder.
+
+## Where to Access Shopify Workflows in TurboDev
+
+Follow these steps to access Shopify workflows:
+
+1. Log in to your **TurboDev dashboard**
+2. Click on **Workflows** from the left navigation panel
+3. Click on **Create Workflow**
+4. Select **Shopify** as the trigger source
+5. Choose the Shopify event you want to automate
+6. Configure the workflow and activate it
+
+Once activated, the workflow will automatically run when the selected Shopify event occurs.
+
+## Available Shopify Workflow Triggers in TurboDev
+
+TurboDev supports multiple Shopify automation triggers.
+
+You can create workflows for:
+
+- Cart Abandoned
+- Order Created
+- Order Fulfilled
+- Order Out for Delivery
+- Order Delivered
+- Order Cancelled
+
+Each trigger can be customized based on your business needs.
+
+## Cart Abandoned Workflow
+
+Recover lost sales by automatically reminding customers to complete their purchase.
+
+### How to Create Cart Abandoned Workflow
+
+1. Go to **Workflows** in TurboDev
+2. Click **Create Workflow**
+3. Select trigger: **Shopify → Cart Abandoned**
+4. Click **Continue**
+
+Now configure the workflow.
+
+### Step 1: Add WhatsApp Message Action
+
+Click **Add Action**
+
+Select:
+
+**Send WhatsApp Message**
+
+Choose or create a message template.
+
+Example message:
+
+> Hi {{customer_name}}, you left items in your cart. Complete your order here: {{checkout_link}}
+
+### Step 2: Set Delay Timing (Optional)
+
+You can set when the message should be sent.
+
+Recommended timing:
+
+- 30 minutes
+- 1 hour
+- 6 hours
+- 24 hours
+
+This helps avoid sending messages too early.
+
+### Step 3: Publish Workflow
+
+Click:
+
+**Save → Publish**
+
+Your cart recovery automation is now active.
+
+## Order Confirmation Workflow
+
+Automatically notify customers when their order is placed.
+
+### Steps to Create Order Confirmation Workflow
+
+1. Go to **Workflows**
+2. Click **Create Workflow**
+3. Select trigger: **Shopify → Order Created**
+4. Click **Continue**
+
+Add action:
+
+**Send WhatsApp Message**
+
+Example message:
+
+> Hi {{customer_name}}, your order {{order_id}} has been confirmed. We will notify you once it ships.
+
+Click:
+
+**Save → Publish**
+
+Customers will now receive instant order confirmation.
+
+## Order Fulfilled Workflow
+
+Notify customers when their order is shipped.
+
+### Steps to Create Order Fulfilled Workflow
+
+1. Go to **Workflows**
+2. Click **Create Workflow**
+3. Select trigger: **Shopify → Order Fulfilled**
+4. Click **Continue**
+
+Add WhatsApp message action.
+
+Example message:
+
+> Good news {{customer_name}}! Your order {{order_id}} has been shipped. Track here: {{tracking_link}}
+
+Click:
+
+**Save → Publish**
+
+## Order Out for Delivery Workflow
+
+Inform customers when their order is out for delivery.
+
+### Steps to Create Workflow
+
+1. Go to **Workflows**
+2. Click **Create Workflow**
+3. Select trigger: **Shopify → Out for Delivery**
+4. Click **Continue**
+
+Add WhatsApp message.
+
+Example:
+
+> Your order {{order_id}} is out for delivery and will arrive today.
+
+Publish the workflow.
+
+## Order Delivered Workflow
+
+Automatically confirm successful delivery and follow up.
+
+### Steps to Create Workflow
+
+1. Go to **Workflows**
+2. Click **Create Workflow**
+3. Select trigger: **Shopify → Order Delivered**
+4. Click **Continue**
+
+Add message action.
+
+Example:
+
+> Your order {{order_id}} has been delivered. Thank you for shopping with us.
+
+Optional: Add review request or feedback message.
+
+Publish workflow.
+
+## Order Cancelled Workflow
+
+Notify customers when an order is cancelled.
+
+### Steps to Create Workflow
+
+1. Go to **Workflows**
+2. Click **Create Workflow**
+3. Select trigger: **Shopify → Order Cancelled**
+4. Click **Continue**
+
+Add WhatsApp message.
+
+Example:
+
+> Your order {{order_id}} has been cancelled. Contact support if you need assistance.
+
+Publish workflow.
