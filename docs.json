@@ -156,13 +156,6 @@
             "pages": [
               "generic-webhooks",
               {
-                "group": "Shopify",
-                "pages": [
-                  "shopify-integration-with-turbodev",
-                  "shopify-workflows-in-turbodev"
-                ]
-              },
-              {
                 "group": "Payments",
                 "pages": [
                   {
@@ -172,6 +165,13 @@
                       "razorpay-workflows-in-turbodev"
                     ]
                   }
+                ]
+              },
+              {
+                "group": "Shopify",
+                "pages": [
+                  "shopify-integration-with-turbodev",
+                  "shopify-workflows-in-turbodev"
                 ]
               }
             ]
