@@ -175,6 +175,13 @@
                 ]
               }
             ]
+          },
+          {
+            "group": "AI AGENTS",
+            "pages": [
+              "ai-agents-in-turbodev",
+              "configuring-an-ai-agent-in-turbodev"
+            ]
           }
         ]
       }

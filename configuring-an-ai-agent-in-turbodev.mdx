@@ -1,0 +1,186 @@
+---
+title: "Configuring an AI Agent in Turbodev"
+---
+
+After creating an AI Agent, the next step is configuration. Proper configuration ensures your AI responds accurately, uses the correct knowledge base, and performs actions automatically.
+
+To configure:
+
+1. Go to **AI Agents**
+2. Click on the AI you created
+3. You will see the following tabs:
+   - Instructions
+   - Actions
+   - Knowledge
+   - Settings
+
+## 1. Instructions
+
+<Frame>
+  ![Ai Instruction](/images/AI_Agents/ai_instruction.png)
+</Frame>
+
+The **Instructions** section defines how the AI should behave and respond to customers.
+
+The quality of your instructions directly impacts the quality of AI responses. Clear and structured instructions produce better results.
+
+### What You Can Add in Instructions
+
+You can:
+
+- Define how the AI should talk (formal, friendly, sales tone, support tone)
+- Define what it should do
+- Add conditions
+- Insert actions
+- Attach files
+- Link WhatsApp flows (forms)
+- Apply contact tags
+
+### Using Actions in Instructions
+
+Inside the Instructions box, type **@** to insert an action.
+
+When you type **@**, a list of available actions will appear. You can select:
+
+- Assign conversation
+- Resolve conversation
+- Add a note
+- Tag a customer
+- Share a file
+- Trigger a WhatsApp flow
+- Custom API action
+
+You can also create **custom actions using API calls** for advanced automation.
+
+This allows the AI to not just reply, but also perform backend operations automatically.
+
+## 2. Knowledge
+
+The Knowledge section allows you to attach relevant information sources to the AI Agent.
+
+<Frame>
+  ![Ai Knowledge](/images/AI_Agents/ai_knowledge.png)
+</Frame>
+
+To add knowledge:
+
+1. Click **Manage Knowledge**
+2. Select the knowledge base you want
+3. Attach it to the specific AI Agent
+
+You can maintain multiple knowledge bases such as:
+
+- Support documents
+- Product information
+- FAQ documents
+- Policy documents
+
+Example:
+
+If you have:
+
+- Support Knowledge Base
+- Sales Information Knowledge Base
+
+You can attach the Support Knowledge only to the Support AI Agent.
+
+This ensures the AI responds only using relevant information.
+
+## 3. Settings
+
+The Settings tab allows you to control the AI model behavior and technical configuration.
+
+<Frame>
+  ![Ai Settings](/images/AI_Agents/ai_settings.png)
+</Frame>
+
+## AI Provider
+
+You can choose the AI provider:
+
+- OpenAI
+- Gemini
+- Anthropic
+- Others (based on availability)
+
+## Model Selection
+
+You can select the model version such as:
+
+- gpt-5.2
+- gpt-5-mini
+- Other available models
+
+Different models may vary in performance and cost.
+
+## Temperature
+
+Temperature controls randomness in responses.
+
+- Lower values → More focused and deterministic responses
+- Higher values → More creative and varied responses
+
+Example:
+
+- 0.1 → Very structured responses
+- 0.8 → More creative responses
+
+## Tokens
+
+Defines the **maximum number of tokens in the response**.
+
+Higher token limit → Longer responses\
+Lower token limit → Shorter responses
+
+## Processing Capabilities
+
+<Frame>
+  ![Ai Processing&response Settings](/images/AI_Agents/ai_processing&response_settings.png)
+</Frame>
+
+You can enable or disable processing for different media types.
+
+These toggles are ON by default.
+
+### Image Processing
+
+If enabled, the AI can understand and respond to image inputs.
+
+You can turn OFF the toggle if not required.
+
+### Audio Processing
+
+If enabled, the AI can process audio messages.
+
+You can disable it if your use case does not require audio handling.
+
+### Document Processing
+
+If enabled, the AI can read and process document files shared by customers.
+
+You can turn it OFF if not required.
+
+### Response Settings
+
+This section controls response behavior and delay settings.
+
+### Processing Message
+
+Default message shown while AI is generating a response:
+
+> "Hold on a moment while I process your request..."
+
+You can:
+
+- Edit this text
+- Turn OFF the toggle if you don’t want a processing message
+
+### Save Changes
+
+After making all updates:
+
+Click **Save Changes**
+
+Your AI Agent configuration will be updated immediately.
+
+Your AI Agent is now fully configured and ready to automate conversations intelligently.
