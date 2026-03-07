@@ -76,6 +76,13 @@
             ]
           },
           {
+            "group": "AI AGENTS",
+            "pages": [
+              "ai-agents-in-turbodev",
+              "configuring-an-ai-agent-in-turbodev"
+            ]
+          },
+          {
             "group": "BOTS",
             "pages": [
               "guides/bots/bots-in-turbo-dev",
@@ -174,13 +181,6 @@
                   "shopify-workflows-in-turbodev"
                 ]
               }
-            ]
-          },
-          {
-            "group": "AI AGENTS",
-            "pages": [
-              "ai-agents-in-turbodev",
-              "configuring-an-ai-agent-in-turbodev"
             ]
           }
         ]
