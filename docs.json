@@ -23,7 +23,7 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://app-v2.turbodev.ai"
+      "href": "https://app.turbodev.ai"
     }
   },
   "navigation": {
