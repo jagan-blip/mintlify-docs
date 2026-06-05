@@ -64,7 +64,7 @@ For every incoming fulfillments/update event, the backend inspects the payload a
    For Workflows 5, 6, and 7, all customer and order data (name, phone, address, order total, product list) is NOT in the fulfillments/update webhook payload. Turbodev fetches it automatically from the parent order using the body.order\_id before sending the message.
 </Note>
 
-## **WORKFLOW 1  New Prepaid Order**
+## **WORKFLOW 1 - New Prepaid Order**
 
 ### Webhook: orders/create
 
@@ -138,7 +138,7 @@ Track your order: {{7}} 
 
  
 
-## **WORKFLOW 2  Payment Confirmation**
+## **WORKFLOW 2 - Payment Confirmation**
 
 ### Webhook: orders/paid
 
@@ -180,7 +180,7 @@ Track here: {{6}} 
 
  
 
-## **WORKFLOW 3  Order Cancelled**
+## **WORKFLOW 3 - Order Cancelled**
 
 ### Webhook: orders/cancelled
 
@@ -212,7 +212,7 @@ Need help? Contact {{5}}.
   **Use the computed date field:** Always map body.cancelled\_at\_dd\_mm\_yyyy for the cancellation date in your template. The raw body.cancelled\_at is an ISO 8601 string (e.g. 2026-06-04T10:30:00\+00:00) which looks unreadable in a WhatsApp message.
 </Warning>
 
-## **WORKFLOW 4  Order Fulfilled With Tracking**
+## **WORKFLOW 4 - Order Fulfilled With Tracking**
 
 ### Webhook: orders/fulfilled 
 
@@ -249,7 +249,7 @@ Track your package: {{5}}
 | {{4}} Tracking Number | body.fulfillments\[\].tracking\_number | 1234567890 |
 | {{5}} Tracking URL | body.fulfillments\[\].tracking\_url | https://www.dhl.com/... |
 
-## **WORKFLOW 5  Order Partially Fulfilled With Tracking**
+## **WORKFLOW 5 - Order Partially Fulfilled With Tracking**
 
 ### Webhook: fulfillments/update
 
@@ -309,7 +309,7 @@ More items will ship soon. Track: {{5}}
 
  
 
-## **WORKFLOW 6  Out for Delivery**
+## **WORKFLOW 6 - Out for Delivery**
 
 ### Webhook: fulfillments/update
 
@@ -338,7 +338,7 @@ Someone should be available to receive the package.
 | {{3}} Carrier Name | body.tracking\_company | DHL |
 | {{4}} Tracking Number | body.tracking\_number | 1234567890 |
 
-## **WORKFLOW 7  Order Delivered**
+## **WORKFLOW 7 - Order Delivered**
 
 ### Webhook: fulfillments/update
 
@@ -367,7 +367,7 @@ Leave us a review: {{4}}
 | {{3}} Brand Name | integration.brandName | My Nutrition Store |
 | {{4}} Order Status URL | body.order\_status\_url | https://store.myshopify.com/... |
 
-## **WORKFLOW 8  Refund Confirmation**
+## **WORKFLOW 8 - Refund Confirmation**
 
 ### Webhook: refunds/create
 
@@ -412,7 +412,7 @@ Refunds typically appear in 3–5 business days.
 | {{4}} Order Name | body.order\_name | #1089 |
 | {{5}} Refund ID | body.refund\_id | R1234567890 |
 
-## **WORKFLOW 9  Abandoned Cart Reminder (1/2/3)**
+## **WORKFLOW 9 - Abandoned Cart Reminder (1/2/3)**
 
 ### Webhook: checkouts/update
 
