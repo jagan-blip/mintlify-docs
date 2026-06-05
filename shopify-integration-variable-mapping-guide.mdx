@@ -8,13 +8,11 @@ This guide documents every available variable for all 9 supported webhook workfl
 
 ## How Variable Mapping Works
 
-When you design a WhatsApp template in Turbodev, each {{variable}} placeholder in the template body must be mapped to a field path. There are two kinds of fields: 
+When you design a WhatsApp template in Turbodev, each {{variable}} placeholder in the template body must be mapped to a field path. There are two kinds of fields:
 
-•    Regular fields - come directly from the raw Shopify webhook payload. They are always available immediately when the webhook fires and cost no extra API calls.
-
-•    Computed fields - enriched by the Turbodev backend. The system makes an additional Shopify API call or performs a calculation to produce these. They are NOT present in the raw webhook body. Crucially, computed fields are only fetched when you actually map them in your template - they are never fetched unnecessarily.
-
-•    Array fields (\[\]) - when a field is an array (e.g. line\_items), Turbodev returns the first element by default unless otherwise noted.
+- Regular fields - come directly from the raw Shopify webhook payload. They are always available immediately when the webhook fires and cost no extra API calls.
+- Computed fields - enriched by the Turbodev backend. The system makes an additional Shopify API call or performs a calculation to produce these. They are NOT present in the raw webhook body. Crucially, computed fields are only fetched when you actually map them in your template - they are never fetched unnecessarily.
+- Array fields ('\[\]'') - when a field is an array (e.g. line\_items), Turbodev returns the first element by default unless otherwise noted.
 
 **integration.brandName** - this is the store brand name you configured in the Integration Settings panel inside Turbodev. It is always available in every workflow.
 
@@ -24,17 +22,15 @@ When you design a WhatsApp template in Turbodev, each {{variable}} placeholder i
 
 | **Field Path** | **Template Label** | **Example Value** | **Notes** |
 | --- | --- | --- | --- |
-| body.order\_number | Order Number | 1089 | Direct from webhook payload |
+| 'body.order\_number' | Order Number | 1089 | Direct from webhook payload |
 | body.total\_price | Order Total | 1724.95 | Direct from webhook payload |
 | body.line\_items.product\_names | Product Names | Whey Protein, Creatine | Backend-computed; only fetched if mapped |
-| body.product\_image | Product Image URL | https://cdn.shopify... | First product image; only fetched if mapped |
+| body.product\_image | Product Image URL | [https://cdn.shopify](https://cdn.shopify)... | First product image; only fetched if mapped |
 | body.payment\_id | Payment ID | pay\_Abc123xyz | Gateway reference; only fetched if mapped |
 
 <Tip>
   Only map computed fields when you genuinely need them. Each unmapped computed field saves one Shopify API call, keeping your workflow fast and within Shopify's rate limits.
 </Tip>
-
- 
 
 ## fulfillment\_status is Always Null on New Orders
 
@@ -42,37 +38,29 @@ When you design a WhatsApp template in Turbodev, each {{variable}} placeholder i
   When a new order is created (orders/create) or payment is captured (orders/paid), the fulfillment\_status field is ALWAYS null or empty. Shopify does not populate it until fulfillment actually begins. Never use body.fulfillment\_status as a condition or variable on these two triggers it will always be blank.
 </Warning>
 
- 
-
 ## How Routing Works for fulfillments/update
 
 Workflows 5, 6, and 7 (Partially Fulfilled, Out for Delivery, and Delivered) all listen to the same Shopify fulfillments/update webhook. Shopify sends every fulfillment event to a single endpoint - it cannot split them by shipment status.
 
 The Turbodev backend solves this automatically. Each workflow is tagged with a triggerType:
 
-•    order\_partially\_fulfilled\_with\_tracking - fires when some items are fulfilled and shipment\_status is NOT out\_for\_delivery or delivered.
-
-•    out\_for\_delivery - fires only when shipment\_status = out\_for\_delivery.
-
-•    order\_delivered - fires only when shipment\_status = delivered.
-
- 
+- order\_partially\_fulfilled\_with\_tracking - fires when some items are fulfilled and shipment\_status is NOT out\_for\_delivery or delivered.
+- out\_for\_delivery - fires only when shipment\_status = out\_for\_delivery.
+- order\_delivered - fires only when shipment\_status = delivered.
 
 For every incoming fulfillments/update event, the backend inspects the payload and routes it to exactly the matching workflow. The other two workflows are silently ignored. You do not need to add any conditional logic in your templates.
 
 <Note>
-   For Workflows 5, 6, and 7, all customer and order data (name, phone, address, order total, product list) is NOT in the fulfillments/update webhook payload. Turbodev fetches it automatically from the parent order using the body.order\_id before sending the message.
+  For Workflows 5, 6, and 7, all customer and order data (name, phone, address, order total, product list) is NOT in the fulfillments/update webhook payload. Turbodev fetches it automatically from the parent order using the body.order\_id before sending the message. All fields below are fetched this way.
 </Note>
 
-## **WORKFLOW 1 - New Prepaid Order**
+## **WORKFLOW 1 - New Prepaid Order**
 
 ### Webhook: orders/create
 
 #### When It Triggers
 
 Fires when a new order is placed in your Shopify store. This includes all orders regardless of payment status - prepaid, COD, and pending payment.
-
- 
 
 ### Available Variables
 
@@ -85,10 +73,10 @@ Fires when a new order is placed in your Shopify store. This includes all orders
 | body.currency | Currency | INR | 3-letter ISO currency code |
 | body.financial\_status | Payment Status | paid / pending | Use to differentiate prepaid vs COD |
 | body.fulfillment\_status | Fulfillment Status | null | ALWAYS null here do not use |
-| body.order\_status\_url | Order Status URL | https://store.myshopify.com/... | Full URL to order tracking page |
+| body.order\_status\_url | Order Status URL | [https://store.myshopify.com/](https://store.myshopify.com/)... | Full URL to order tracking page |
 | body.customer.first\_name | Customer First Name | Joseph |  |
 | body.customer.last\_name | Customer Last Name | Merlin |  |
-| body.customer.email | Customer Email | merlin@example.com |  |
+| body.customer.email | Customer Email | [merlin@example.com](mailto:merlin@example.com) |  |
 | body.customer.phone | Customer Phone | \+91xxxxxxxxxx | Used to identify WhatsApp recipient |
 | body.billing\_address.first\_name | Billing First Name | Joseph |  |
 | body.billing\_address.last\_name | Billing Last Name | Merlin |  |
@@ -107,7 +95,7 @@ Fires when a new order is placed in your Shopify store. This includes all orders
 | body.line\_items.all\_products | All Products Formatted | • Whey Protein x1 • Creatine x2 | Bullet list with quantities |
 | body.line\_items.product\_count | Distinct Product Count | 3 | Number of unique line items |
 | body.line\_items.total\_quantity | Total Quantity | 5 | Sum of all item quantities |
-| body.product\_image | First Product Image URL | https://cdn.shopify.com/... | Only fetched if you map this field |
+| body.product\_image | First Product Image URL | [https://cdn.shopify.com/](https://cdn.shopify.com/)... | Only fetched if you map this field |
 | integration.brandName | Brand Name | My Nutrition Store | From Integration Settings |
 
 ### Sample Template & Recommended Mappings
@@ -120,7 +108,7 @@ Items: {{4}}
 
 Total: {{5}} {{6}}
 
-Track your order: {{7}} 
+Track your order: {{7}}
 
 | Template Variable | Map To Field | Example Output |
 | --- | --- | --- |
@@ -130,15 +118,13 @@ Track your order: {{7}} 
 | {{4}} Product List | body.line\_items.all\_products | • Whey Protein x1 • Creatine x2 |
 | {{5}} Total Price | body.total\_price | 1724.95 |
 | {{6}} Currency | body.currency | INR |
-| {{7}} Order Status URL | body.order\_status\_url | https://store.myshopify.com/... |
+| {{7}} Order Status URL | body.order\_status\_url | [https://store.myshopify.com/](https://store.myshopify.com/)... |
 
 <Warning>
   **Do not use body.fulfillment\_status in this workflow.** It is always null when orders/create fires. Using it will result in blank or broken template variables.
 </Warning>
 
- 
-
-## **WORKFLOW 2 - Payment Confirmation**
+## **WORKFLOW 2 - Payment Confirmation**
 
 ### Webhook: orders/paid
 
@@ -163,7 +149,7 @@ Hi {{1}}, payment of {{2}} {{3}} confirmed for order {{4}}!
 
 Payment ref: {{5}}
 
-Track here: {{6}} 
+Track here: {{6}}
 
 | **Template Variable** | **Map To Field** | **Example Output** |
 | --- | --- | --- |
@@ -178,9 +164,7 @@ Track here: {{6}} 
   **Do not use body.fulfillment\_status on this trigger.** Even though payment is confirmed, fulfilment has not yet started. The field will be null and must not be used as a variable or condition.
 </Warning>
 
- 
-
-## **WORKFLOW 3 - Order Cancelled**
+## **WORKFLOW 3 - Order Cancelled**
 
 ### Webhook: orders/cancelled
 
@@ -208,13 +192,21 @@ Cancelled on: {{4}}
 
 Need help? Contact {{5}}.
 
+| **Template Variable** | **Map To Field** | **Example Output** |
+| --- | --- | --- |
+| {{1}} Customer Name | body.customer.first\_name | Joseph |
+| {{2}} Order Name | body.name | #1089 |
+| {{3}} Cancellation Reason | body.cancel\_reason | Customer changed or canceled order |
+| {{4}} Cancelled At (Formatted) | body.cancelled\_at\_dd\_mm\_yyyy | 04/06/2026 |
+| {{5}} Brand Name | integration.brandName | My Nutrition Store |
+
 <Warning>
   **Use the computed date field:** Always map body.cancelled\_at\_dd\_mm\_yyyy for the cancellation date in your template. The raw body.cancelled\_at is an ISO 8601 string (e.g. 2026-06-04T10:30:00\+00:00) which looks unreadable in a WhatsApp message.
 </Warning>
 
-## **WORKFLOW 4 - Order Fulfilled With Tracking**
+## **WORKFLOW 4 - Order Fulfilled With Tracking**
 
-### Webhook: orders/fulfilled 
+### Webhook: orders/fulfilled
 
 ### When It Triggers
 
@@ -228,28 +220,26 @@ All variables from Workflow 1 are available, plus the following tracking fields:
 | --- | --- | --- | --- |
 | body.fulfillments\[\].tracking\_company | Carrier Name | DHL | First fulfillment's carrier |
 | body.fulfillments\[\].tracking\_number | Tracking Number | 1234567890 | Carrier tracking number |
-| body.fulfillments\[\].tracking\_url | Tracking URL | https://www.dhl.com/track/1234567890 | Full carrier tracking link |
+| body.fulfillments\[\].tracking\_url | Tracking URL | [https://www.dhl.com/track/1234567890](https://www.dhl.com/track/1234567890) | Full carrier tracking link |
 | body.fulfillments\[\].status | Fulfillment Status | success | success, pending, cancelled, error, failure |
-
- 
 
 ### Sample Template & Recommended Mappings
 
 Hi {{1}}, your order {{2}} has been shipped!
 
-Carrier: {{3}}  |  Tracking No: {{4}}
+Carrier: {{3}} | Tracking No: {{4}}
 
 Track your package: {{5}}
 
 | **Template Variable** | **Map To Field** | **Example Output** |
 | --- | --- | --- |
-| {{1}}  Customer Name | body.customer.first\_name | Joseph |
+| {{1}} Customer Name | body.customer.first\_name | Joseph |
 | {{2}} Order Name | body.name | #1089 |
 | {{3}} Carrier Name | body.fulfillments\[\].tracking\_company | DHL |
 | {{4}} Tracking Number | body.fulfillments\[\].tracking\_number | 1234567890 |
-| {{5}} Tracking URL | body.fulfillments\[\].tracking\_url | https://www.dhl.com/... |
+| {{5}} Tracking URL | body.fulfillments\[\].tracking\_url | [https://www.dhl.com/](https://www.dhl.com/)... |
 
-## **WORKFLOW 5 - Order Partially Fulfilled With Tracking**
+## **WORKFLOW 5 - Order Partially Fulfilled With Tracking**
 
 ### Webhook: fulfillments/update
 
@@ -260,8 +250,6 @@ Fires when some (but not all) items in an order are fulfilled, and the shipment 
 <Warning>
   **Customer data is fetched automatically:** The fulfillments/update webhook does NOT include customer details. Turbodev automatically fetches customer name, phone, address, and order totals from the parent order API using body.order\_id before sending the message. All fields below are fetched this way.
 </Warning>
-
- 
 
 ### Available Variables
 
@@ -276,10 +264,10 @@ Fires when some (but not all) items in an order are fulfilled, and the shipment 
 | body.fulfillment\_status | Order Fulfillment Level | partial | Order-level: partial (this triggers the routing) |
 | body.tracking\_company | Carrier Name | FedEx |  |
 | body.tracking\_number | Tracking Number | 7489234019 |  |
-| body.tracking\_url | Tracking URL | https://fedex.com/... |  |
+| body.tracking\_url | Tracking URL | [https://fedex.com/](https://fedex.com/)... |  |
 | body.customer.first\_name | Customer First Name | Joseph | Fetched from parent order |
 | body.customer.last\_name | Customer Last Name | Merlin | Fetched from parent order |
-| body.customer.email | Customer Email | merlin@example.com | Fetched from parent order |
+| body.customer.email | Customer Email | [merlin@example.com](mailto:merlin@example.com) | Fetched from parent order |
 | body.customer.phone | Customer Phone | \+919876543210 | Fetched from parent order |
 | body.shipping\_address.address1 | Shipping Address | 42 MG Road | Fetched from parent order |
 | body.shipping\_address.city | Shipping City | Chennai | Fetched from parent order |
@@ -291,7 +279,7 @@ Fires when some (but not all) items in an order are fulfilled, and the shipment 
 
 Hi {{1}}, part of your order {{2}} has been shipped!
 
-Carrier: {{3}}  |  Tracking: {{4}}
+Carrier: {{3}} | Tracking: {{4}}
 
 More items will ship soon. Track: {{5}}
 
@@ -301,15 +289,13 @@ More items will ship soon. Track: {{5}}
 | {{2}} Order Name | body.order\_name | #1089 |
 | {{3}} Carrier Name | body.tracking\_company | FedEx |
 | {{4}} Tracking Number | body.tracking\_number | 74892341019 |
-| {{5}} Tracking URL | body.tracking\_url | https://fedex.com/... |
+| {{5}} Tracking URL | body.tracking\_url | [https://fedex.com/](https://fedex.com/)... |
 
 <Warning>
   **Do not use body.total\_price in this workflow.** For all fulfillments/update workflows (5, 6, 7), the fulfillment payload does not carry a reliable order total. Always use body.order\_total\_price which is fetched from the parent order.
 </Warning>
 
- 
-
-## **WORKFLOW 6 - Out for Delivery**
+## **WORKFLOW 6 - Out for Delivery**
 
 ### Webhook: fulfillments/update
 
@@ -320,8 +306,6 @@ Fires when the carrier updates the shipment\_status to 'out\_for\_delivery'. The
 <Tip>
   **Same fields as Workflow 5:** All available variables are identical to Workflow 5. Customer and order data are fetched from the parent order. Use body.order\_name and body.order\_total\_price (not body.name or body.total\_price).
 </Tip>
-
- 
 
 ### Sample Template & Recommended Mappings
 
@@ -338,7 +322,7 @@ Someone should be available to receive the package.
 | {{3}} Carrier Name | body.tracking\_company | DHL |
 | {{4}} Tracking Number | body.tracking\_number | 1234567890 |
 
-## **WORKFLOW 7 - Order Delivered**
+## **WORKFLOW 7 - Order Delivered**
 
 ### Webhook: fulfillments/update
 
@@ -349,8 +333,6 @@ Fires when the carrier updates the shipment\_status to 'delivered'. The backend 
 <Tip>
   **Same fields as Workflow 5:** All available variables are identical to Workflow 5. Customer and order data are fetched from the parent order. Use body.order\_name and body.order\_total\_price.
 </Tip>
-
- 
 
 ### Sample Template & Recommended Mappings
 
@@ -365,17 +347,15 @@ Leave us a review: {{4}}
 | {{1}} Customer Name | body.customer.first\_name | Joseph |
 | {{2}} Order Name | body.order\_name | #1089 |
 | {{3}} Brand Name | integration.brandName | My Nutrition Store |
-| {{4}} Order Status URL | body.order\_status\_url | https://store.myshopify.com/... |
+| {{4}} Order Status URL | body.order\_status\_url | [https://store.myshopify.com/](https://store.myshopify.com/)... |
 
-## **WORKFLOW 8 - Refund Confirmation**
+## **WORKFLOW 8 - Refund Confirmation**
 
 ### Webhook: refunds/create
 
 ### When It Triggers
 
 Fires when a refund is created on any order, whether partial or full. This applies to refunds processed through Shopify admin, returns, or automated apps.
-
- 
 
 ### Available Variables
 
@@ -412,7 +392,7 @@ Refunds typically appear in 3–5 business days.
 | {{4}} Order Name | body.order\_name | #1089 |
 | {{5}} Refund ID | body.refund\_id | R1234567890 |
 
-## **WORKFLOW 9 - Abandoned Cart Reminder (1/2/3)**
+## **WORKFLOW 9 - Abandoned Cart Reminder (1/2/3)**
 
 ### Webhook: checkouts/update
 
@@ -424,27 +404,25 @@ Fires when a checkout is updated and the customer has not completed the purchase
   **Smart auto-skip:** If the customer completes their purchase before the delay timer fires, the abandoned cart message is automatically suppressed. You will never spam a customer who has already bought.
 </Tip>
 
- 
-
 ### Available Variables
 
 | **Field Path** | **Template Label** | **Example Value** |  |
 | --- | --- | --- | --- |
-| body.abandoned\_checkout\_url | Full Checkout Recovery URL | https://yourstore.myshopify.com/checkouts/abc123/recover | Use in template body text (NOT button variables) |
+| body.abandoned\_checkout\_url | Full Checkout Recovery URL | [https://yourstore.myshopify.com/checkouts/abc123/recover](https://yourstore.myshopify.com/checkouts/abc123/recover) | Use in template body text (NOT button variables) |
 | body.abandoned\_checkout\_url\_path | Checkout URL Path Only | /checkouts/abc123/recover | Use in WhatsApp URL button variable (without domain) |
 | body.total\_price | Cart Total | 1724.95 | Total value of abandoned cart |
 | body.currency | Currency | INR |  |
 | body.phone | Customer Phone | \+919876543210 | Checkout-level phone |
 | body.customer.first\_name | Customer First Name | Joseph |  |
 | body.customer.last\_name | Customer Last Name | Merlin |  |
-| body.customer.email | Customer Email | merlin@example.com |  |
+| body.customer.email | Customer Email | [merlin@example.com](mailto:merlin@example.com) |  |
 | body.customer.phone | Customer Phone (Customer) | \+91xxxxxxxxxx |  |
 | body.billing\_address.address1 | Billing Address | 42 MG Road |  |
 | body.shipping\_address.city | Shipping City | Chennai |  |
 | body.line\_items.product\_names | Product Names | Whey Protein, Creatine |  |
 | body.line\_items.all\_products | Products Formatted | • Whey Protein x1 • Creatine x2 |  |
 | body.line\_items.total\_quantity | Total Quantity | 3 |  |
-| body.product\_image | First Product Image URL | https://cdn.shopify.com/... | Use as WhatsApp image header variable |
+| body.product\_image | First Product Image URL | [https://cdn.shopify.com/](https://cdn.shopify.com/)... | Use as WhatsApp image header variable |
 | integration.brandName | Brand Name | My Nutrition Store | From Integration Settings |
 
 ### Sample Template & Recommended Mappings
@@ -464,13 +442,13 @@ Complete your order: {{6}}
 | {{3}} Cart Total | body.total\_price | 1724.95 |
 | {{4}} Currency | body.currency | INR |
 | {{5}} Product Names | body.line\_items.product\_names | Whey Protein, Creatine |
-| {{6}} Checkout URL (body text) | body.abandoned\_checkout\_url | https://yourstore.myshopify.com/... |
+| {{6}} Checkout URL (body text) | body.abandoned\_checkout\_url | [https://yourstore.myshopify.com/](https://yourstore.myshopify.com/)... |
 
 ### Special Note: URL Button Variables
 
 WhatsApp template URL buttons work by combining a fixed prefix (configured in the template) with a dynamic suffix variable. For example, your template button might have a fixed prefix of:
 
-https://yourstore.myshopify.com
+[https://yourstore.myshopify.com](https://yourstore.myshopify.com)
 
 And the variable fills in the path portion:
 
@@ -492,7 +470,7 @@ The following mistakes appear frequently when configuring workflows. Each one wi
 
 ### **Mistake 2 - Using the full URL in WhatsApp URL button variables**
 
-**Problem:** WhatsApp URL button templates have a fixed domain prefix defined in the template itself. If you also pass the full URL (including the domain) as the variable, the final URL will look like: https://yourstore.myshopify.comhttps://yourstore.myshopify.com/checkouts/... which is broken.
+**Problem:** WhatsApp URL button templates have a fixed domain prefix defined in the template itself. If you also pass the full URL (including the domain) as the variable, the final URL will look like: [https://yourstore.myshopify.comhttps://yourstore.myshopify.com/checkouts/](https://yourstore.myshopify.comhttps://yourstore.myshopify.com/checkouts/)... which is broken.
 
 **Fix:** For URL button variables, always map body.abandoned\_checkout\_url\_path which contains only the path portion (e.g. /checkouts/abc123/recover). Reserve body.abandoned\_checkout\_url (the full URL) for plain text body variables only.
 
@@ -514,25 +492,17 @@ Shopify sends all fulfillment events to a single webhook endpoint. It cannot spl
 
 Turbodev handles this automatically using a triggerType system. Here is how it works step by step:
 
-•    Shopify fires a fulfillments/update event for any carrier status change.
-
-•    Turbodev receives the event and reads the body.shipment\_status and body.fulfillment\_status fields.
-
-•    The backend matches the event to the correct triggerType based on these rules:
-
-◦    shipment\_status = out\_for\_delivery → routed to Workflow 6 (Out for Delivery)
-
-◦    shipment\_status = delivered → routed to Workflow 7 (Order Delivered)
-
-◦    fulfillment\_status = partial AND shipment\_status is neither of the above → routed to Workflow 5 (Partial Fulfillment)
-
-•    The matched workflow's WhatsApp template is sent. All other workflows for this event are silently skipped.
+- Shopify fires a fulfillments/update event for any carrier status change.
+- Turbodev receives the event and reads the body.shipment\_status and body.fulfillment\_status fields.
+- The backend matches the event to the correct triggerType based on these rules:
+  - shipment\_status = out\_for\_delivery → routed to Workflow 6 (Out for Delivery)
+  - shipment\_status = delivered → routed to Workflow 7 (Order Delivered)
+  - fulfillment\_status = partial AND shipment\_status is neither of the above → routed to Workflow 5 (Partial Fulfillment)
+- The matched workflow's WhatsApp template is sent. All other workflows for this event are silently skipped.
 
 <Info>
   **You do not need to add conditional logic:** As a Turbodev user, you simply configure each workflow (5, 6, 7) with its own WhatsApp template. The routing happens automatically in the backend. There is no risk of accidentally sending the 'out for delivery' message when an order is only partially shipped, or vice versa.
 </Info>
-
- 
 
 ## Shipment Status Reference
 
