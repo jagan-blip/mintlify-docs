@@ -25,7 +25,7 @@ When you design a WhatsApp template in Turbodev, each {{variable}} placeholder i
 | 'body.order\_number' | Order Number | 1089 | Direct from webhook payload |
 | body.total\_price | Order Total | 1724.95 | Direct from webhook payload |
 | body.line\_items.product\_names | Product Names | Whey Protein, Creatine | Backend-computed; only fetched if mapped |
-| body.product\_image | Product Image URL | [https://cdn.shopify](https://cdn.shopify)... | First product image; only fetched if mapped |
+| body.product\_image | Product Image URL | https://cdn.shopify... | First product image; only fetched if mapped |
 | body.payment\_id | Payment ID | pay\_Abc123xyz | Gateway reference; only fetched if mapped |
 
 <Tip>
@@ -73,10 +73,10 @@ Fires when a new order is placed in your Shopify store. This includes all orders
 | body.currency | Currency | INR | 3-letter ISO currency code |
 | body.financial\_status | Payment Status | paid / pending | Use to differentiate prepaid vs COD |
 | body.fulfillment\_status | Fulfillment Status | null | ALWAYS null here do not use |
-| body.order\_status\_url | Order Status URL | [https://store.myshopify.com/](https://store.myshopify.com/)... | Full URL to order tracking page |
+| body.order\_status\_url | Order Status URL | https://store.myshopify.com/... | Full URL to order tracking page |
 | body.customer.first\_name | Customer First Name | Joseph |  |
 | body.customer.last\_name | Customer Last Name | Merlin |  |
-| body.customer.email | Customer Email | [merlin@example.com](mailto:merlin@example.com) |  |
+| body.customer.email | Customer Email | merlin@example.com |  |
 | body.customer.phone | Customer Phone | \+91xxxxxxxxxx | Used to identify WhatsApp recipient |
 | body.billing\_address.first\_name | Billing First Name | Joseph |  |
 | body.billing\_address.last\_name | Billing Last Name | Merlin |  |
@@ -95,7 +95,7 @@ Fires when a new order is placed in your Shopify store. This includes all orders
 | body.line\_items.all\_products | All Products Formatted | • Whey Protein x1 • Creatine x2 | Bullet list with quantities |
 | body.line\_items.product\_count | Distinct Product Count | 3 | Number of unique line items |
 | body.line\_items.total\_quantity | Total Quantity | 5 | Sum of all item quantities |
-| body.product\_image | First Product Image URL | [https://cdn.shopify.com/](https://cdn.shopify.com/)... | Only fetched if you map this field |
+| body.product\_image | First Product Image URL | https://cdn.shopify.com/... | Only fetched if you map this field |
 | integration.brandName | Brand Name | My Nutrition Store | From Integration Settings |
 
 ### Sample Template & Recommended Mappings
@@ -118,7 +118,7 @@ Track your order: {{7}}
 | {{4}} Product List | body.line\_items.all\_products | • Whey Protein x1 • Creatine x2 |
 | {{5}} Total Price | body.total\_price | 1724.95 |
 | {{6}} Currency | body.currency | INR |
-| {{7}} Order Status URL | body.order\_status\_url | [https://store.myshopify.com/](https://store.myshopify.com/)... |
+| {{7}} Order Status URL | body.order\_status\_url | https://store.myshopify.com/... |
 
 <Warning>
   **Do not use body.fulfillment\_status in this workflow.** It is always null when orders/create fires. Using it will result in blank or broken template variables.
@@ -220,7 +220,7 @@ All variables from Workflow 1 are available, plus the following tracking fields:
 | --- | --- | --- | --- |
 | body.fulfillments\[\].tracking\_company | Carrier Name | DHL | First fulfillment's carrier |
 | body.fulfillments\[\].tracking\_number | Tracking Number | 1234567890 | Carrier tracking number |
-| body.fulfillments\[\].tracking\_url | Tracking URL | [https://www.dhl.com/track/1234567890](https://www.dhl.com/track/1234567890) | Full carrier tracking link |
+| body.fulfillments\[\].tracking\_url | Tracking URL | https://www.dhl.com/track/1234567890 | Full carrier tracking link |
 | body.fulfillments\[\].status | Fulfillment Status | success | success, pending, cancelled, error, failure |
 
 ### Sample Template & Recommended Mappings
@@ -237,7 +237,7 @@ Track your package: {{5}}
 | {{2}} Order Name | body.name | #1089 |
 | {{3}} Carrier Name | body.fulfillments\[\].tracking\_company | DHL |
 | {{4}} Tracking Number | body.fulfillments\[\].tracking\_number | 1234567890 |
-| {{5}} Tracking URL | body.fulfillments\[\].tracking\_url | [https://www.dhl.com/](https://www.dhl.com/)... |
+| {{5}} Tracking URL | body.fulfillments\[\].tracking\_url | https://www.dhl.com/... |
 
 ## **WORKFLOW 5 - Order Partially Fulfilled With Tracking**
 
@@ -264,10 +264,10 @@ Fires when some (but not all) items in an order are fulfilled, and the shipment 
 | body.fulfillment\_status | Order Fulfillment Level | partial | Order-level: partial (this triggers the routing) |
 | body.tracking\_company | Carrier Name | FedEx |  |
 | body.tracking\_number | Tracking Number | 7489234019 |  |
-| body.tracking\_url | Tracking URL | [https://fedex.com/](https://fedex.com/)... |  |
+| body.tracking\_url | Tracking URL | https://fedex.com/... |  |
 | body.customer.first\_name | Customer First Name | Joseph | Fetched from parent order |
 | body.customer.last\_name | Customer Last Name | Merlin | Fetched from parent order |
-| body.customer.email | Customer Email | [merlin@example.com](mailto:merlin@example.com) | Fetched from parent order |
+| body.customer.email | Customer Email | merlin@example.com | Fetched from parent order |
 | body.customer.phone | Customer Phone | \+919876543210 | Fetched from parent order |
 | body.shipping\_address.address1 | Shipping Address | 42 MG Road | Fetched from parent order |
 | body.shipping\_address.city | Shipping City | Chennai | Fetched from parent order |
@@ -289,7 +289,7 @@ More items will ship soon. Track: {{5}}
 | {{2}} Order Name | body.order\_name | #1089 |
 | {{3}} Carrier Name | body.tracking\_company | FedEx |
 | {{4}} Tracking Number | body.tracking\_number | 74892341019 |
-| {{5}} Tracking URL | body.tracking\_url | [https://fedex.com/](https://fedex.com/)... |
+| {{5}} Tracking URL | body.tracking\_url | https://fedex.com/... |
 
 <Warning>
   **Do not use body.total\_price in this workflow.** For all fulfillments/update workflows (5, 6, 7), the fulfillment payload does not carry a reliable order total. Always use body.order\_total\_price which is fetched from the parent order.
@@ -347,7 +347,7 @@ Leave us a review: {{4}}
 | {{1}} Customer Name | body.customer.first\_name | Joseph |
 | {{2}} Order Name | body.order\_name | #1089 |
 | {{3}} Brand Name | integration.brandName | My Nutrition Store |
-| {{4}} Order Status URL | body.order\_status\_url | [https://store.myshopify.com/](https://store.myshopify.com/)... |
+| {{4}} Order Status URL | body.order\_status\_url | https://store.myshopify.com/... |
 
 ## **WORKFLOW 8 - Refund Confirmation**
 
@@ -408,21 +408,21 @@ Fires when a checkout is updated and the customer has not completed the purchase
 
 | **Field Path** | **Template Label** | **Example Value** |  |
 | --- | --- | --- | --- |
-| body.abandoned\_checkout\_url | Full Checkout Recovery URL | [https://yourstore.myshopify.com/checkouts/abc123/recover](https://yourstore.myshopify.com/checkouts/abc123/recover) | Use in template body text (NOT button variables) |
+| body.abandoned\_checkout\_url | Full Checkout Recovery URL | https://yourstore.myshopify.com/checkouts/abc123/recover | Use in template body text (NOT button variables) |
 | body.abandoned\_checkout\_url\_path | Checkout URL Path Only | /checkouts/abc123/recover | Use in WhatsApp URL button variable (without domain) |
 | body.total\_price | Cart Total | 1724.95 | Total value of abandoned cart |
 | body.currency | Currency | INR |  |
 | body.phone | Customer Phone | \+919876543210 | Checkout-level phone |
 | body.customer.first\_name | Customer First Name | Joseph |  |
 | body.customer.last\_name | Customer Last Name | Merlin |  |
-| body.customer.email | Customer Email | [merlin@example.com](mailto:merlin@example.com) |  |
+| body.customer.email | Customer Email | merlin@example.com |  |
 | body.customer.phone | Customer Phone (Customer) | \+91xxxxxxxxxx |  |
 | body.billing\_address.address1 | Billing Address | 42 MG Road |  |
 | body.shipping\_address.city | Shipping City | Chennai |  |
 | body.line\_items.product\_names | Product Names | Whey Protein, Creatine |  |
 | body.line\_items.all\_products | Products Formatted | • Whey Protein x1 • Creatine x2 |  |
 | body.line\_items.total\_quantity | Total Quantity | 3 |  |
-| body.product\_image | First Product Image URL | [https://cdn.shopify.com/](https://cdn.shopify.com/)... | Use as WhatsApp image header variable |
+| body.product\_image | First Product Image URL | https://cdn.shopify.com/... | Use as WhatsApp image header variable |
 | integration.brandName | Brand Name | My Nutrition Store | From Integration Settings |
 
 ### Sample Template & Recommended Mappings
@@ -442,13 +442,13 @@ Complete your order: {{6}}
 | {{3}} Cart Total | body.total\_price | 1724.95 |
 | {{4}} Currency | body.currency | INR |
 | {{5}} Product Names | body.line\_items.product\_names | Whey Protein, Creatine |
-| {{6}} Checkout URL (body text) | body.abandoned\_checkout\_url | [https://yourstore.myshopify.com/](https://yourstore.myshopify.com/)... |
+| {{6}} Checkout URL (body text) | body.abandoned\_checkout\_url | https://yourstore.myshopify.com/... |
 
 ### Special Note: URL Button Variables
 
 WhatsApp template URL buttons work by combining a fixed prefix (configured in the template) with a dynamic suffix variable. For example, your template button might have a fixed prefix of:
 
-[https://yourstore.myshopify.com](https://yourstore.myshopify.com)
+https://yourstore.myshopify.com
 
 And the variable fills in the path portion:
 
@@ -470,7 +470,7 @@ The following mistakes appear frequently when configuring workflows. Each one wi
 
 ### **Mistake 2 - Using the full URL in WhatsApp URL button variables**
 
-**Problem:** WhatsApp URL button templates have a fixed domain prefix defined in the template itself. If you also pass the full URL (including the domain) as the variable, the final URL will look like: [https://yourstore.myshopify.comhttps://yourstore.myshopify.com/checkouts/](https://yourstore.myshopify.comhttps://yourstore.myshopify.com/checkouts/)... which is broken.
+**Problem:** WhatsApp URL button templates have a fixed domain prefix defined in the template itself. If you also pass the full URL (including the domain) as the variable, the final URL will look like: https://yourstore.myshopify.comhttps://yourstore.myshopify.com/checkouts/... which is broken.
 
 **Fix:** For URL button variables, always map body.abandoned\_checkout\_url\_path which contains only the path portion (e.g. /checkouts/abc123/recover). Reserve body.abandoned\_checkout\_url (the full URL) for plain text body variables only.
 
