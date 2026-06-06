@@ -178,12 +178,12 @@
                 "group": "Shopify",
                 "pages": [
                   "shopify-integration-with-turbodev",
-                  "shopify-workflows-in-turbodev",
-                  "shopify-variable-mapping"
+                  "shopify-workflows-in-turbodev"
                 ]
               }
             ]
-          }
+          },
+          "shopify-integration-variable-mapping-guide"
         ]
       }
     ]
