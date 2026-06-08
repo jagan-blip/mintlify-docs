@@ -8,4 +8,8 @@ This guide documents every available variable for all 9 supported webhook workfl
 
 ## How Variable Mapping Works
 
-When you design a WhatsApp template in Turbodev,
+When you design a WhatsApp template in Turbodev, each "{{variable}}" placeholder in the template body must be mapped to a field path. There are two kinds of fields:
+
+- Regular fields - come directly from the raw Shopify webhook payload. They are always available immediately when the webhook fires and cost no extra API calls.
+- Computed fields - enriched by the Turbodev backend. The system makes an additional Shopify API call or performs a calculation to produce these. They are NOT present in the raw webhook body. Crucially, computed fields are only fetched when you actually map them in your template - they are never fetched unnecessarily.
+- Array fields ('\[\]'') - when a field is an array (e.g. line\_items), Turbodev returns the first element by default unless otherwise noted. **integration.brandName** - this is the store brand name you configured in the Integration Settings panel inside Turbodev. It is always available in every workflow.
