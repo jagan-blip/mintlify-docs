@@ -5,10 +5,3 @@ title: "Shopify Integration Variable Mapping Guide"
 The Turbodev Shopify WhatsApp Integration connects your Shopify store to WhatsApp via webhook events. Each time Shopify fires a webhook (e.g. a new order, a payment, a shipment update), Turbodev receives the payload, optionally enriches it with additional Shopify API data, and then sends a pre-configured WhatsApp template message to the customer.
 
 This guide documents every available variable for all 9 supported webhook workflows so that you can confidently map data to your WhatsApp message templates without guesswork.
-
-## How Variable Mapping Works
-
-When you design a WhatsApp template in Turbodev, each {{variable}} placeholder in the template body must be mapped to a field path. There are two kinds of fields:
-
-- Regular fields - come directly from the raw Shopify webhook payload. They are always available immediately when the webhook fires and cost no extra API calls.
-- Computed fields - enriched by the Turbodev backend. The system makes an additional Shopify API call or performs a calculation to produce these. They are NOT present in the raw webhook body. Crucially, computed fields are only fetched when you actually map them in your template - they are never fetched unnecessarily.
